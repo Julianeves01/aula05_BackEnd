@@ -47,9 +47,32 @@ const filmesMarcantes = [
     }
 ]
 
+
+
+
+
 app.get("/filmes", (req, res) => {
     return res.status(200). send(filmesMarcantes);
 })
+
+app.get("/doces", (req, res) => {
+    return res.status(200). send(guloseimas);
+})
+
+app.post("/doces", (req, res) => {
+    const {nome,preco} = req.body;
+
+    const novoDoce = {
+        id: guloseimas.length +1,
+        nome: nome,
+        preco:preco,
+    };
+
+    guloseimas.push(novoDoce)
+    return res.status(200). send(guloseimas);
+});
+
+
 
 
 
@@ -57,9 +80,6 @@ app.get("/", (req, res) => { //request, response
     return res.status(200). send({ message: "Hello, world!"})
 })
 
-app.get("/doces", (req, res) => {
-    return res.status(200). send(guloseimas)
-})
 
 app.listen(port, () => {
     console.log(`⚡ Server started on http://localhost:${port}`)
